@@ -16,13 +16,13 @@ lives = 3 # Number of lives
 
 
 # text file name
-file_name = "mathgame_scores_data.txt" # Naming the file name
+FILE_NAME = "mathgame_scores_data.txt" # Naming the file name Constant
 
 
 # add data to the mathgame_scores_data.txt text file
 def add_data():
     global username_input, score
-    with open(file_name, 'a') as file:
+    with open(FILE_NAME, 'a') as file:
         file.write(f"{username_input},{timer},{difficulty},{score}\n") # adds username_input, timer, difficulty, score
 
 # reads the data in the text file
