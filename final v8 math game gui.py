@@ -1,3 +1,8 @@
+# THIS program is created by Zaki Yaseen. 
+# DATE created : 26/07/2024. 
+# THIS program provides students of any math skill level the opportunity to improve their maths skills through a fun, interactive and competitive maths game. 
+############################################################################################################################################### 
+
 # Zaki Yaseen Math Game GUI AS91906
 
 # Import all nesesary modules for tkinter
