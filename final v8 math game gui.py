@@ -622,7 +622,6 @@ def minus1():
         timer_label.config(text=f"Time remaining: {timer} seconds") # Update timer label
         timer_id = root.after(1000, minus1)        
     else:
-        print("times up")
         window4_label2.config(text = "Times up")
         show_frame(end_screen_window) # Changes frame to end screen window
         timer=60 # Sets timer back to 60 seconds
@@ -649,7 +648,6 @@ def minus30():
         timer_label.config(text=f"Time remaining: {timer} seconds") # Update timer label
         timer_id = root.after(1000, minus30)        
     else:
-        print("times up")
         window4_label2.config(text = "Times up")
         show_frame(end_screen_window) # Changes frame to end screen window
         timer=30 # Sets timer back to 30 seconds
@@ -678,7 +676,6 @@ def minus15():
         timer_label.config(text=f"Time remaining: {timer} seconds") # Update timer label
         timer_id = root.after(1000, minus15)
     else:
-        print("times up")
         window4_label2.config(text = "Times up")
         show_frame(end_screen_window) # Changes frame to end screen window
         timer=15 # Sets timer back to 15 seconds
@@ -767,7 +764,6 @@ def number_of_lives():
         lives_label.config(text="❤", bg = "#aed8f5", font=("Arial", 25)) # If lives = 1 then lives label will update and show 1 hearts
     else:
         lives_label.config(text="") # If lives = 0 then lives label will update and show nothing
-        print("you died, your lives are gone")
         window4_label2.config(text = "You died, all your hearts are gone")
         cancel_timer() # Cancel timer
         show_frame(end_screen_window) # Frame changes to end screen window
