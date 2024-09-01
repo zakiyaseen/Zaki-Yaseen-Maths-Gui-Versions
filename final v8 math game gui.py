@@ -1,66 +1,66 @@
-# THIS program is created by Zaki Yaseen. 
-# DATE created : 26/07/2024. 
-# THIS program provides students of any math skill level the opportunity to improve their maths skills through a fun, interactive and competitive maths game. 
-############################################################################################################################################### 
+# THIS program is created by Zaki Yaseen.
+# DATE created : 26/07/2024.
+# THIS program provides students of any math skill level the opportunity to improve their maths skills through a fun, interactive and competitive maths game.
+###############################################################################################################################################
 
-# Zaki Yaseen Math Game GUI AS91906
+# Zaki Yaseen Math Game GUI AS91906.
 
-# Import all nesesary modules for tkinter
-from tkinter import * # Import everything from tkinter
-from tkinter import ttk # Import ttk
-from tkinter import messagebox # Import messagebox
-import operator # Import operator
-import random # Import random
-
-
-
-# Global variables
-timer_id = None # Timer identification
-tree = None # Tree none
-lives = 3 # Number of lives
+# Import all nesesary modules for tkinter.
+from tkinter import * # Import everything from tkinter.
+from tkinter import ttk # Import ttk.
+from tkinter import messagebox # Import messagebox.
+import operator # Import operator.
+import random # Import random.
 
 
-# text file name
-FILE_NAME = "mathgame_scores_data.txt" # Naming the file name Constant
+
+# Global variables.
+timer_id = None # Timer identification.
+tree = None # Tree none.
+lives = 3 # Number of lives.
 
 
-# add data to the mathgame_scores_data.txt text file
+# text file name.
+FILE_NAME = "mathgame_scores_data.txt" # Naming the file name Constant.
+
+
+# add data to the mathgame_scores_data.txt text file.
 def add_data():
     global username_input, score
     with open(FILE_NAME, 'a') as file:
-        file.write(f"{username_input},{timer},{difficulty},{score}\n") # adds username_input, timer, difficulty, score
+        file.write(f"{username_input},{timer},{difficulty},{score}\n") # adds username_input, timer, difficulty, score.
 
-# reads the data in the text file
+# reads the data in the text file.
 def read_data():
-    global sorted_filtered_lines15_easy, sorted_filtered_lines15_medium, sorted_filtered_lines15_hard # Reading the time 15 lines
-    global sorted_filtered_lines30_easy, sorted_filtered_lines30_medium, sorted_filtered_lines30_hard # Reading the time 30 lines
-    global sorted_filtered_lines60_easy, sorted_filtered_lines60_medium, sorted_filtered_lines60_hard # Reading the time 60 lines
+    global sorted_filtered_lines15_easy, sorted_filtered_lines15_medium, sorted_filtered_lines15_hard # Reading the time 15 lines.
+    global sorted_filtered_lines30_easy, sorted_filtered_lines30_medium, sorted_filtered_lines30_hard # Reading the time 30 lines.
+    global sorted_filtered_lines60_easy, sorted_filtered_lines60_medium, sorted_filtered_lines60_hard # Reading the time 60 lines.
 
-    # Read the file content
+    # Read the file content.
     with open('mathgame_scores_data.txt', 'r') as file:
         lines = file.readlines()
 
-    # Filter lines where the second column is 15
-    filtered_lines15_easy = [line for line in lines if line.split(',')[1] == '15' and line.split(',')[2].strip().lower() == 'easy'] # Filter lines where the third column is easy
-    filtered_lines15_medium = [line for line in lines if line.split(',')[1] == '15' and line.split(',')[2].strip().lower() == 'medium'] # Filter lines where the third column is medium
-    filtered_lines15_hard = [line for line in lines if line.split(',')[1] == '15' and line.split(',')[2].strip().lower() == 'hard'] # Filter lines where the third column is hard
-    # Filter lines where the second column is 30
-    filtered_lines30_easy = [line for line in lines if line.split(',')[1] == '30' and line.split(',')[2].strip().lower() == 'easy'] # Filter lines where the third column is easy
-    filtered_lines30_medium = [line for line in lines if line.split(',')[1] == '30' and line.split(',')[2].strip().lower() == 'medium'] # Filter lines where the third column is medium
-    filtered_lines30_hard = [line for line in lines if line.split(',')[1] == '30' and line.split(',')[2].strip().lower() == 'hard'] # Filter lines where the third column is hard
-    # Filter lines where the second column is 60
-    filtered_lines60_easy = [line for line in lines if line.split(',')[1] == '60' and line.split(',')[2].strip().lower() == 'easy'] # Filter lines where the third column is easy
-    filtered_lines60_medium = [line for line in lines if line.split(',')[1] == '60' and line.split(',')[2].strip().lower() == 'medium'] # Filter lines where the third column is medium
-    filtered_lines60_hard = [line for line in lines if line.split(',')[1] == '60' and line.split(',')[2].strip().lower() == 'hard'] # Filter lines where the third column is hard
+    # Filter lines where the second column is 15.
+    filtered_lines15_easy = [line for line in lines if line.split(',')[1] == '15' and line.split(',')[2].strip().lower() == 'easy'] # Filter lines where the third column is easy.
+    filtered_lines15_medium = [line for line in lines if line.split(',')[1] == '15' and line.split(',')[2].strip().lower() == 'medium'] # Filter lines where the third column is medium.
+    filtered_lines15_hard = [line for line in lines if line.split(',')[1] == '15' and line.split(',')[2].strip().lower() == 'hard'] # Filter lines where the third column is hard.
+    # Filter lines where the second column is 30.
+    filtered_lines30_easy = [line for line in lines if line.split(',')[1] == '30' and line.split(',')[2].strip().lower() == 'easy'] # Filter lines where the third column is easy.
+    filtered_lines30_medium = [line for line in lines if line.split(',')[1] == '30' and line.split(',')[2].strip().lower() == 'medium'] # Filter lines where the third column is medium.
+    filtered_lines30_hard = [line for line in lines if line.split(',')[1] == '30' and line.split(',')[2].strip().lower() == 'hard'] # Filter lines where the third column is hard.
+    # Filter lines where the second column is 60.
+    filtered_lines60_easy = [line for line in lines if line.split(',')[1] == '60' and line.split(',')[2].strip().lower() == 'easy'] # Filter lines where the third column is easy.
+    filtered_lines60_medium = [line for line in lines if line.split(',')[1] == '60' and line.split(',')[2].strip().lower() == 'medium'] # Filter lines where the third column is medium.
+    filtered_lines60_hard = [line for line in lines if line.split(',')[1] == '60' and line.split(',')[2].strip().lower() == 'hard'] # Filter lines where the third column is hard.
 
 
 
-    # Sort the filtered lines timer 15 by score highest to lowest
-    sorted_filtered_lines15_easy = sorted(filtered_lines15_easy, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest
-    sorted_filtered_lines15_medium = sorted(filtered_lines15_medium, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest
-    sorted_filtered_lines15_hard = sorted(filtered_lines15_hard, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest
+    # Sort the filtered lines timer 15 by score highest to lowest.
+    sorted_filtered_lines15_easy = sorted(filtered_lines15_easy, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest.
+    sorted_filtered_lines15_medium = sorted(filtered_lines15_medium, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest.
+    sorted_filtered_lines15_hard = sorted(filtered_lines15_hard, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest.
 
-    # Sort the filtered lines timer 30 by score highest to lowest
+    # Sort the filtered lines timer 30 by score highest to lowest.
     sorted_filtered_lines30_easy = sorted(filtered_lines30_easy, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest
     sorted_filtered_lines30_medium = sorted(filtered_lines30_medium, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest
     sorted_filtered_lines30_hard = sorted(filtered_lines30_hard, key=lambda line: int(line.split(',')[3]), reverse=True) # Sorting the scores from highest to lowest
@@ -267,7 +267,7 @@ def check_username_input():
 
 # MAIN WINDOW
 
-root = Tk()
+root = Tk() # Set Tk as root.
 
 container = Frame(root)
 container.pack(fill='both', expand=True)
@@ -568,7 +568,7 @@ def reset_score():
     homer_simpson_angry_label.place_forget() # Removes homer anger image when user gets answer right
     homer_simpson_thumbsup_label.place_forget() # Removes homer thumbs up image when user gets wrong answer
     lives = 3 # Lives =3 when score is being reset
-    lives_label.config(text="❤︎❤︎❤︎", bg = "#aed8f5", font=("Arial", 25)) # Updates lives label
+    lives_label.config(text="❤❤❤︎", bg = "#aed8f5", font=("Arial", 25)) # Updates lives label
     score = 0 # Score =0 when score is being reset
     score_label.config(text=f"Score: {score}") # Updates score label
     label.config(text="")
